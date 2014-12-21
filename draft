@@ -1,0 +1,53 @@
+O estudo da frequência das letras do alfabeto num texto pode ser utilizado para
+vários propósitos, como criptoanálise (de modo a quebrar modelos criptográficos
+clássicos) e a construção de códigos que diminuam a capacidade necessária do
+canal de comunicação (códigos Morse e Baudot/Murray, linotipos e etc.). Idéias
+semelhantes são utilizadas para técnicas modernas de compressão de dados, como a
+Codificação Huffman.
+
+Para linotipos (linotype machines) do Inglês, a ordenação das letras (da mais
+para a menos frequente) dá a sequência "etaoin shrdlu cmfwyp vbgkjq xz".
+
+No Código Morse Internacional Moderno, as letras são rearranjadas em grupos que
+requerem a mesma duração de transmissão: "e it san hurdm wgvlfbk opjxcz yq" (ver
+referência "international-morse-code.png").
+
+Conhecendo a frequência relativa de ocorrência (considerando como a probabilidade)
+das letras em um alfabeto é possível criar sequências que lembrem textos reais.
+Obviamente um amontoado de letras geradas a partir de algum modelo estatístico
+lembra pouco um texto. Restringindo o problema para a contrução de frases (que
+começam com uma letra maiúscula e terminam com um ponto colado à última letra),
+seria necessário inserir alguns símbolos (espaço, vírgula, ponto, acentos e etc.),
+além de saber a probabilidade de dependência de uma letra em relação às suas pre-
+decessoras. No caso mais simples, apenas uma letra precedente, o modelo estatís-
+tico por um conjunto de probabilidades de transição p_i(j), a probabilidade da
+letra i ser seguida pela letra j (neste caso, p_N(P) = p_N(B) = 0, pois antes de
+“P” ou “B” devemos usar a letra “M”). Uma segunda maneira de especificar o modelo
+seria pelo digrama (ou bigrama) p(i,j) (a probabilidade do digrama ij).
+
+1. p(i) = sum_j p(i,j) = sum_j p(j,i) = sum_j p(j)p_j(i)
+2. p(i,j) = p(i)p_i(j)
+3. sum_j p_i(j) = sum_i p(i) = sum_i_j p(i,j) = 1
+
+Modelos mais complexos, como usar trigramas p(i,j,k) ou equivalentemente um con-
+junto de probabilidades de transição p_i_j(k) dariam resultados mais precisos.
+Quanto mais complexo, mais difícil de utilizar. No modelos geral, um conjunto de
+probabilidades p(i1, i2, ..., in) ou um conjunto de probabilidades de transição
+p_i1_i2_..._in-1(in) faz-se necessário.
+
+Processos estocásticos podem ser definidos utilizando como unidade básica palavras
+presentes em um idioma, com probabilidades associadas. Para melhorar este modelo,
+podem ser introduzidas probabilidades de transição, semelhante ao modelo com letras.
+
+
+Aproximação para um idioma natural (utilizando letras):
+
+Ordem 0: Todas as letras são equiprováveis.
+
+Ordem 1: Utilizar probabilidade do idioma natural (inglês). Ver o arquivo no
+diretório data/ "pavel-micka.letter".
+
+Ordem 2: Digramas são introduzidos. Após escolher uma letra, escolhe a seguinte
+de acordo com sua probabilidade de transição p_i(j).
+
+Ordem 3: Utiliza trigramas.
